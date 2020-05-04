@@ -5,7 +5,6 @@ import (
 	"log"
 	"net"
 	"runtime"
-	"syscall"
 	"time"
 
 	"golang.org/x/net/icmp"
@@ -57,10 +56,10 @@ func (p *Pinger) v6PacketReader() {
 		panic(err.Error())
 	}
 	defer file.Close()
-	fd := file.Fd()
+	//fd := file.Fd()
 
 	var pktTime time.Time
-	recvTime := syscall.Timeval{}
+	//recvTime := syscall.Timeval{}
 	for {
 		n, peer, err := p.v6Conn.ReadFrom(rb)
 		if err != nil {
@@ -123,10 +122,10 @@ func (p *Pinger) v4PacketReader() {
 		panic(err.Error())
 	}
 	defer file.Close()
-	fd := file.Fd()
+	// fd := file.Fd()
 
 	var pktTime time.Time
-	recvTime := syscall.Timeval{}
+	// recvTime := syscall.Timeval{}
 	for {
 		n, peer, err := p.v4Conn.ReadFrom(rb)
 		if err != nil {
