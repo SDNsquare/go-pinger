@@ -71,16 +71,8 @@ func (p *Pinger) v6PacketReader() {
 			p.RUnlock()
 			break
 		}
-		//	_, _, errno := syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), uintptr(syscall.SIOCGSTAMP), uintptr(unsafe.Pointer(&recvTime)))
-		err = nil
-		// if errno != 0 {
-		// 	err = errno
-		// }
-		if err == nil {
-			pktTime = time.Unix(0, recvTime.Nano())
-		} else {
-			pktTime = time.Now()
-		}
+
+		pktTime = time.Now()
 
 		rm, err := icmp.ParseMessage(ProtocolIPv6ICMP, rb[:n])
 		if err != nil {
@@ -145,16 +137,8 @@ func (p *Pinger) v4PacketReader() {
 			p.RUnlock()
 			break
 		}
-		// _, _, errno := syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), uintptr(syscall.SIOCGSTAMP), uintptr(unsafe.Pointer(&recvTime)))
-		err = nil
-		// if errno != 0 {
-		// 	err = errno
-		// }
-		if err == nil {
-			pktTime = time.Unix(0, recvTime.Nano())
-		} else {
-			pktTime = time.Now()
-		}
+
+		pktTime = time.Now()
 
 		rm, err := icmp.ParseMessage(ProtocolICMP, rb[:n])
 		if err != nil {
